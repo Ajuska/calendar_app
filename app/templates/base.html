@@ -1,0 +1,14 @@
+<html>
+    <head>
+        {% if title %}
+        <title>{{ title }} - Calendar App </title>
+        {% else %}
+        <title>Welcome to Calendar App!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>Calendar App: <a href="/index">Home</a></div>
+        <hr>
+        {% block content %}{% endblock %}
+    </body>
+</html>
