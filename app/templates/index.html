@@ -2,7 +2,11 @@
 
 {% block content %}
         <h1>Hi, {{ current_user.username }}!</h1>
-        {% for post in posts %}
-        <div><p>{{ event.author.username }} says: <b>{{ event.body }}</b></p></div>
+        <h2>These are all events</h2>
+        {% for event in events %}
+        <div>
+              <p><b>{{ event.author.username }}</b> created event:
+              <b>{{ event.title }}</b> on {{ event.timestamp }}<br> {{ event.body }} </p>
+        </div>
         {% endfor %}
 {% endblock %}

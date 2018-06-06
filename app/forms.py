@@ -1,6 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, BooleanField, SubmitField
-from wtforms.validators import DataRequired, ValidationError, Email, EqualTo
+from wtforms import StringField, PasswordField, BooleanField, SubmitField, TextAreaField
+from wtforms.validators import DataRequired, ValidationError, Email, EqualTo, Length
+from wtforms.fields.html5 import DateField, TimeField, DateTimeField
 from app.models import User
 
 class LoginForm(FlaskForm):
@@ -25,3 +26,10 @@ class RegistrationForm(FlaskForm):
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Please use a different email address.')
+
+class EventForm(FlaskForm):
+    date = DateField('Pick a date', format="%Y-%m-%d")
+    time = TimeField('Pick an hour')
+    title = StringField('Event name', validators=[DataRequired()])
+    body = TextAreaField('Add your event', validators=[DataRequired(), Length(min=1, max=140)])
+    submit = SubmitField()
