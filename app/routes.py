@@ -62,3 +62,37 @@ def new_event():
         flash('Your event was created!')
         return redirect(url_for('index'))
     return render_template('new_event.html', title='New Event', form=form)
+
+@app.route('/edit_event/<int:id>', methods=['GET', 'POST'])
+def edit_event(id):
+    form = EventForm()
+    event = Event.query.filter_by(id=id).first()
+    if form.validate_on_submit():
+        full_date = datetime.combine(form.date.data, form.time.data)
+        event.timestamp = full_date
+        event.title = form.title.data
+        event.body = form.body.data
+        db.session.commit()
+        flash('Your changes have been saved!')
+        return redirect(url_for('index'))
+
+    elif request.method == 'GET':
+        form.date.data = event.timestamp.date()
+        form.time.data = event.timestamp.time()
+        form.title.data = event.title
+        form.body.data = event.body
+    return render_template('edit_event.html', title='Edit Event', form=form)
+
+@app.route('/delete_event/<int:id>', methods=['GET', 'POST'])
+def delete_event(id):
+    event = Event.query.filter_by(id=id).first()
+    if request.method == 'POST':
+        if request.form.get('Yes') == 'Yes':
+            db.session.delete(event)
+            db.session.commit()
+            flash('Even was deleted!')
+            return redirect(url_for('index'))
+        elif request.form.get('No') == 'No':
+            flash('Even was not deleted!')
+            return redirect(url_for('index'))
+    return render_template('delete_event.html', title='Delete Event', event=event)

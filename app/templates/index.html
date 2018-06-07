@@ -6,7 +6,9 @@
         {% for event in events %}
         <div>
               <p><b>{{ event.author.username }}</b> created event:
-              <b>{{ event.title }}</b> on {{ event.timestamp }}<br> {{ event.body }} </p>
+              <b>{{ event.title }}</b> on {{ event.timestamp }}<br> {{ event.body }}
+              <br> <a href="{{ url_for('edit_event', id=event.id) }}">Edit event</a>
+              <br> <a href="{{ url_for('delete_event', id=event.id)}}">Delele event</a></p>
         </div>
         {% endfor %}
 {% endblock %}

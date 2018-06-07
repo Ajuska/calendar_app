@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Delete event</h1>
+        <form method="POST" action="">
+           <div class="form-group">
+               <label>Are you sure you want to delete "{{ event.title }}"?</label>
+               <input type="submit" name="Yes" value="Yes">
+               <input type="submit" name="No" value="No">
+           </div>
+       </from>
+{% endblock %}
