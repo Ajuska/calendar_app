@@ -51,6 +51,7 @@ def register():
     return render_template('register.html', title='Register', form=form)
 
 @app.route('/new_event', methods=['GET', 'POST'])
+@login_required
 def new_event():
     form = EventForm()
     if form.validate_on_submit():
@@ -64,6 +65,7 @@ def new_event():
     return render_template('new_event.html', title='New Event', form=form)
 
 @app.route('/edit_event/<int:id>', methods=['GET', 'POST'])
+@login_required
 def edit_event(id):
     form = EventForm()
     event = Event.query.filter_by(id=id).first()
@@ -84,6 +86,7 @@ def edit_event(id):
     return render_template('edit_event.html', title='Edit Event', form=form)
 
 @app.route('/delete_event/<int:id>', methods=['GET', 'POST'])
+@login_required
 def delete_event(id):
     event = Event.query.filter_by(id=id).first()
     if request.method == 'POST':

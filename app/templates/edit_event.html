@@ -1,36 +1,11 @@
 {% extends 'base.html' %}
+{% import 'bootstrap/wtf.html' as wtf %}
 
-{% block content %}
+{% block app_content %}
     <h1>Create new event</h1>
-        <form action="" method="post">
-            {{ form.hidden_tag() }}
-
-            <p>
-                {{ form.date.label }}
-                {{ form.date(size=20) }}
-                {% for error in form.date.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-                {{ form.time.label }}
-                {{ form.time(size=8) }}
-                {% for error in form.time.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            <p>
-                {{ form.title.label }}<br>
-                {{ form.title(size=32) }}<br>
-                {% for error in form.title.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.body.label }}<br>
-                {{ form.body(cols=32, rows=8) }}<br>
-                {% for error in form.body.errors %}
-                <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ form.submit }}</p>
-        </form>
+    <div class="row">
+        <div class="col-md-4">
+            {{ wtf.quick_form(form) }}
+        </div>
+    </div>
 {% endblock %}

@@ -29,7 +29,7 @@ class RegistrationForm(FlaskForm):
 
 class EventForm(FlaskForm):
     date = DateField('Pick a date', format="%Y-%m-%d")
-    time = TimeField('Pick an hour')
+    time = TimeField('Add an hour')
     title = StringField('Event name', validators=[DataRequired()])
-    body = TextAreaField('Add your event', validators=[DataRequired(), Length(min=1, max=140)])
+    body = TextAreaField('Event desciption', validators=[Length(min=0, max=140)])
     submit = SubmitField()
